@@ -36,5 +36,13 @@ def update_album(id):
             return jsonify(album), 200
     return jsonify({'mensaje': 'Álbum no encontrado'}), 404
 
+@app.route("/albums/<int:id>", methods=['DELETE'])
+def delete_album(id):
+    for album in albums:
+        if album['id'] == id:
+            albums.remove(album)
+            return jsonify({'message': 'Album deleted'}), 200
+    return jsonify({'message': 'Album not found'}), 404
+
 if __name__ == '__main__':
     app.run(debug=True, port=8080)
